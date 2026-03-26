@@ -2,33 +2,68 @@ aid: apitoolkit
 url: >-
   https://raw.githubusercontent.com/api-evangelist/apitoolkit/refs/heads/main/apis.yml
 apis:
-  - aid: apitoolkit:apitoolkit
-    name: APIToolKit
+  - aid: apitoolkit:apitoolkit-platform
+    name: APIToolkit Platform
     tags:
-      - API
+      - Monitoring
+      - Observability
+      - Debugging
+      - Error Tracking
     humanURL: https://apitoolkit.io
     properties:
-      - url: https://apitoolkit.io
+      - url: https://apitoolkit.io/docs/
         type: Documentation
+      - url: https://apitoolkit.io/docs/get-started/
+        type: Getting Started
+      - url: https://apitoolkit.io/docs/sdks/
+        type: SDKs
+      - url: https://apitoolkit.io/docs/api-reference/
+        type: API Reference
     description: >-
-      One of the most important aspects of a good REST API workflow is the
-      design and documentation of the API. A clear and consistent API design can
-      ...
-name: APIToolKit
+      APIToolkit provides API monitoring, observability, and debugging tools that
+      help developers observe, debug, and monitor backend systems and third-party
+      APIs. It offers advanced error tracking, breaking change detection, anomaly
+      detection, and API log exploration capabilities.
+name: APIToolkit
 tags:
   - Platform
   - Observability
   - Debugging
   - Monitoring
+  - Error Tracking
+  - API Management
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-01-08'
-modified: '2025-01-13'
+modified: '2026-03-26'
 position: Consuming
 description: >-
-  Observe, Debug & Monitor backend systems or any third party APIs with Advanced
-  Error & Breaking Change Detection in APIs.
+  APIToolkit is an API monitoring and observability platform that helps
+  developers observe, debug, and monitor backend systems and third-party APIs.
+  It provides advanced error tracking, breaking change detection, anomaly
+  detection, and API log exploration to ensure API reliability and performance.
+common:
+  - type: Website
+    url: https://apitoolkit.io
+  - type: Documentation
+    url: https://apitoolkit.io/docs/
+  - type: Blog
+    url: https://apitoolkit.io/blog/
+  - type: Pricing
+    url: https://apitoolkit.io/pricing/
+  - type: GitHub
+    url: https://github.com/apitoolkit
+  - type: Login
+    url: https://app.apitoolkit.io/login
+  - type: Signup
+    url: https://app.apitoolkit.io/register
+  - type: Twitter
+    url: https://twitter.com/apaboroern
+  - type: Support
+    url: https://apitoolkit.io/docs/
+  - type: Change Log
+    url: https://apitoolkit.io/changelog/
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
