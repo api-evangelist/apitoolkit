@@ -5,10 +5,10 @@ apis:
   - aid: apitoolkit:apitoolkit-platform
     name: APIToolkit Platform
     tags:
-      - Monitoring
-      - Observability
       - Debugging
       - Error Tracking
+      - Monitoring
+      - Observability
     humanURL: https://apitoolkit.io
     properties:
       - url: https://apitoolkit.io/docs/
@@ -26,12 +26,12 @@ apis:
       detection, and API log exploration capabilities.
 name: APIToolkit
 tags:
-  - Platform
-  - Observability
-  - Debugging
-  - Monitoring
-  - Error Tracking
   - API Management
+  - Debugging
+  - Error Tracking
+  - Monitoring
+  - Observability
+  - Platform
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
