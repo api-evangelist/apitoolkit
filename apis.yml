@@ -151,6 +151,10 @@ common:
         description: APM platform integration for forwarding data to New Relic.
       - name: Prometheus
         description: Metrics integration for Prometheus monitoring.
+  - type: Integrations
+    url: https://monoscope.tech/integrations
+integrations:
+  - name: Test JSON Redaction
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
