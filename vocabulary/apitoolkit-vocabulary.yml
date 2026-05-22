@@ -1,0 +1,102 @@
+name: APIToolkit (Monoscope) Vocabulary
+description: >-
+  Domain vocabulary for the Monoscope (formerly APIToolkit) API observability
+  platform, blending its public glossary with the resources exposed by its
+  REST API, MCP server, and CLI.
+provider: apitoolkit
+homepage: https://monoscope.tech/
+sources:
+  - https://monoscope.tech/docs/glossary/
+  - https://monoscope.tech/docs/api-reference/
+terms:
+  - term: API Observability
+    definition: >-
+      The ability to gain insights into the internal workings of an API and its
+      interactions within a system through collecting, analysing, and
+      visualising telemetry data.
+  - term: API Monitoring
+    definition: >-
+      Continuous examination of API performance, availability, and functionality
+      through metrics and parameter tracking to detect issues and anomalies.
+  - term: API Analytics
+    definition: >-
+      Systematic collection and examination of usage and performance data —
+      calls, response times, user behaviour, and trends.
+  - term: API Logs
+    definition: Records of requests and events on the endpoints of an API.
+  - term: API Metrics
+    definition: >-
+      Quantitative measurements assessing API performance, health, and usage
+      patterns.
+  - term: Latency
+    definition: >-
+      The amount of time it takes for a packet of data to travel from one place
+      (source) to another (destination).
+  - term: Throughput
+    definition: The rate at which an amount of data is transmitted over a given period.
+  - term: Percentile
+    definition: >-
+      A statistical measure indicating the value threshold — e.g. p95 means 95%
+      of data points fall below that level.
+  - term: Anomaly
+    definition: >-
+      User activity on an API that is significantly different from previously
+      tracked activity, surfacing as increased response times, errors, or
+      downtime.
+  - term: Breaking Change
+    definition: >-
+      A change to an API contract that breaks backward compatibility with
+      existing consumers, detected by Monoscope in real time.
+  - term: Session Replay
+    definition: >-
+      Recording and playback of a user's frontend session that triggered an
+      error, used for root-cause analysis.
+  - term: Project
+    definition: >-
+      The Monoscope tenant boundary; all API keys, monitors, metrics, and
+      telemetry data are scoped to a single project (`pid`).
+  - term: Monitor
+    definition: >-
+      A scheduled evaluation of a metric query against a threshold and
+      interval; can be `active`, `paused`, or `triggered` and routes to
+      notification channels.
+  - term: Notification Channel
+    definition: >-
+      A configured alert destination (Slack, PagerDuty, email, webhook) that
+      receives notifications when monitors trigger.
+  - term: Telemetry Schema
+    definition: >-
+      The list of telemetry fields available for a project, each with a
+      type (string, number, boolean, timestamp) and estimated cardinality.
+  - term: KQL
+    definition: >-
+      Kusto-style query language used in the Monoscope dashboard and CLI for
+      searching events, logs, and traces with operators, aggregations, and time
+      binning.
+  - term: MCP Server
+    definition: >-
+      Hosted Model Context Protocol endpoint exposing approximately 50
+      auto-derived REST tools plus workflow tools (analyze_issue,
+      find_error_patterns, search_events_nl) under the same Bearer API key as
+      the REST API.
+  - term: Workflow Tool
+    definition: >-
+      A higher-level MCP tool that composes multiple REST calls into a single
+      task (e.g. analyze_issue, find_error_patterns, search_events_nl).
+  - term: Claude Code Skill
+    definition: >-
+      Drop-in Claude Code skill (investigate, triage, kql-reference,
+      instrument) that wraps the Monoscope CLI for use inside Claude Code.
+  - term: TimeFusion
+    definition: >-
+      Monoscope's open-source Rust timeseries database that speaks a
+      PostgreSQL dialect over S3 / Delta Lake, enabling affordable long-term
+      retention of events, logs, traces, and metrics.
+  - term: Testkit
+    definition: >-
+      MIT-licensed YAML-based DSL by the APItoolkit/Monoscope team for API
+      manual testing, automation, and browser scenarios.
+  - term: OpenTelemetry
+    definition: >-
+      The vendor-neutral observability framework that underpins Monoscope's
+      780+ integrations and SDKs.

@@ -1,0 +1,34 @@
+apiVersion: naftiko.dev/v1
+kind: CapabilityWorkflow
+metadata:
+  name: incident-triage
+  provider: apitoolkit
+  tags:
+    - Incident Response
+    - Observability
+    - AI Observability
+spec:
+  description: >-
+    Triage a production incident: locate the affected service, pull recent
+    metrics, fetch the telemetry schema for ad-hoc querying, and check which
+    monitors are currently triggered. Designed to be driven by an LLM agent
+    via the Monoscope MCP server or CLI.
+  steps:
+    - id: list-triggered-monitors
+      capability: monoscope-platform.listMonitors
+      input:
+        pid: ${context.projectId}
+        filter: triggered
+        since: 1h
+    - id: pull-affected-metrics
+      capability: monoscope-platform.queryMetrics
+      input:
+        pid: ${context.projectId}
+        data_type: timeseries
+        query: ${steps.list-triggered-monitors.monitors[0].query}
+        since: 1h
+        source: http
+    - id: inspect-schema
+      capability: monoscope-platform.getTelemetrySchema
+      input:
+        pid: ${context.projectId}

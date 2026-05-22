@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apitoolkit/main/json-schema/monoscope-platform-monitor-schema.json",
+  "title": "Monitor",
+  "description": "A Monoscope monitor that evaluates a metric query against a threshold on an interval.",
+  "type": "object",
+  "required": ["id", "name", "status", "query", "threshold", "interval"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "name": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["active", "paused", "triggered"]
+    },
+    "query": {
+      "type": "string",
+      "description": "The metric query this monitor evaluates."
+    },
+    "threshold": {
+      "type": "object",
+      "required": ["operator", "value"],
+      "properties": {
+        "operator": {
+          "type": "string",
+          "enum": [">", ">=", "<", "<=", "=="]
+        },
+        "value": { "type": "number" }
+      }
+    },
+    "interval": {
+      "type": "string",
+      "description": "Evaluation interval (e.g. 5m, 1h)."
+    },
+    "notification_channels": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  }
+}

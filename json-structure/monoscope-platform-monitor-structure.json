@@ -1,0 +1,16 @@
+{
+  "name": "Monitor",
+  "description": "Structure of a Monoscope monitor.",
+  "fields": [
+    { "name": "id", "type": "uuid", "required": true, "description": "Monitor unique identifier." },
+    { "name": "name", "type": "string", "required": true, "description": "Human-readable monitor name." },
+    { "name": "status", "type": "enum", "required": true, "values": ["active", "paused", "triggered"] },
+    { "name": "query", "type": "string", "required": true, "description": "Metric query the monitor evaluates." },
+    { "name": "threshold.operator", "type": "enum", "required": true, "values": [">", ">=", "<", "<=", "=="] },
+    { "name": "threshold.value", "type": "number", "required": true },
+    { "name": "interval", "type": "duration", "required": true, "description": "Evaluation interval (e.g. 5m, 1h)." },
+    { "name": "notification_channels", "type": "array<string>", "required": false },
+    { "name": "created_at", "type": "datetime", "required": false },
+    { "name": "updated_at", "type": "datetime", "required": false }
+  ]
+}

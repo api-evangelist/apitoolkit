@@ -1,0 +1,40 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.monoscope.tech/api/v1/metrics?pid=550e8400-e29b-41d4-a716-446655440000&data_type=timeseries&query=http.server.duration&since=1h&source=http",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "series": [
+        {
+          "timestamp": "2026-05-22T10:00:00Z",
+          "value": 312.4,
+          "labels": {
+            "service": "checkout-api",
+            "route": "/v1/orders",
+            "status_code": "200"
+          }
+        },
+        {
+          "timestamp": "2026-05-22T10:01:00Z",
+          "value": 287.1,
+          "labels": {
+            "service": "checkout-api",
+            "route": "/v1/orders",
+            "status_code": "200"
+          }
+        }
+      ],
+      "metadata": {
+        "query": "http.server.duration",
+        "from": "2026-05-22T09:00:00Z",
+        "to": "2026-05-22T10:00:00Z",
+        "resolution": "1m"
+      }
+    }
+  }
+}

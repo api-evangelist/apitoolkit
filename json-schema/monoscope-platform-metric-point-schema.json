@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apitoolkit/main/json-schema/monoscope-platform-metric-point-schema.json",
+  "title": "MetricPoint",
+  "description": "A single timeseries metric point returned by Monoscope's /metrics endpoint.",
+  "type": "object",
+  "required": ["timestamp", "value"],
+  "properties": {
+    "timestamp": { "type": "string", "format": "date-time" },
+    "value": { "type": "number" },
+    "labels": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}

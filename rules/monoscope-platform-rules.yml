@@ -1,0 +1,64 @@
+extends: ["spectral:oas"]
+documentationUrl: https://monoscope.tech/docs/api-reference/
+functions: []
+rules:
+  monoscope-title-case-summaries:
+    description: Operation summaries should be Title Case (Monoscope convention).
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: warn
+    then:
+      field: summary
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9]+( [A-Z][A-Za-z0-9]+)*$"
+  monoscope-require-operation-id:
+    description: Every operation must have a camelCase operationId.
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: error
+    then:
+      field: operationId
+      function: pattern
+      functionOptions:
+        match: "^[a-z][A-Za-z0-9]+$"
+  monoscope-require-pid-query-param:
+    description: Project-scoped endpoints must accept a `pid` query parameter.
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.name=='pid')]
+    severity: warn
+    then:
+      function: truthy
+  monoscope-bearer-auth-only:
+    description: API must use HTTP Bearer authentication.
+    given: $.components.securitySchemes[*]
+    severity: error
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            type: { const: http }
+            scheme: { const: bearer }
+          required: [type, scheme]
+  monoscope-base-path-versioned:
+    description: Server URL must include the /api/v1 base path.
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "/api/v1"
+  monoscope-rate-limit-response:
+    description: Each operation should declare a 429 rate-limit response.
+    given: $.paths[*][get,post,put,patch,delete].responses
+    severity: warn
+    then:
+      field: "429"
+      function: truthy
+  monoscope-snake-case-query-params:
+    description: Query parameters should be snake_case (e.g. data_type, query_sql).
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')].name
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"

@@ -1,39 +1,61 @@
 aid: apitoolkit
 url: >-
   https://raw.githubusercontent.com/api-evangelist/apitoolkit/refs/heads/main/apis.yml
-name: APIToolkit
+name: APIToolkit (Monoscope)
 tags:
+  - AI Observability
+  - API Analytics
+  - API Catalog
   - API Management
   - API Monitoring
+  - API Testing
   - Breaking Change Detection
+  - CLI
   - Debugging
   - Error Tracking
+  - LLM Observability
+  - Logs and Traces
+  - MCP Server
+  - Metrics
+  - Monitors
   - Observability
   - OpenTelemetry
   - Platform
+  - Session Replay
 kind: contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-01-08'
-modified: '2026-04-19'
+modified: '2026-05-22'
 position: Consuming
 description: >-
-  APIToolkit (now Monoscope) is an API observability and monitoring platform that
-  helps teams find and fix production issues before customers notice them. It provides
-  real-time insights into API performance, errors, and system behavior through unified
-  logging, tracing, and analytics powered by OpenTelemetry with 780+ integrations.
+  APIToolkit (now Monoscope) is an open-source-friendly API observability and monitoring
+  platform that helps teams find and fix production issues before customers notice.
+  It unifies logs, traces, metrics, errors, monitors, and session replay across
+  17+ framework SDKs and 780+ OpenTelemetry integrations. The platform exposes a
+  REST API (api.monoscope.tech/api/v1) for programmatic access to metrics, telemetry
+  schema, and monitors, plus a hosted MCP server with ~50 auto-derived tools and
+  workflow tools (analyze_issue, find_error_patterns, search_events_nl) and four
+  Claude Code skills (investigate, triage, kql-reference, instrument) so agents
+  can drive observability from the terminal or any LLM client. The apitoolkit.io
+  domain now redirects to monoscope.tech.
 apis:
-  - aid: apitoolkit:apitoolkit-platform
-    name: APIToolkit Platform
+  - aid: apitoolkit:monoscope-platform
+    name: Monoscope Platform API
     tags:
-      - API Management
+      - API Analytics
+      - API Catalog
       - API Monitoring
       - Breaking Change Detection
-      - Debugging
       - Error Tracking
+      - Logs and Traces
+      - Metrics
+      - Monitors
       - Observability
       - OpenTelemetry
+      - Session Replay
     humanURL: https://monoscope.tech/
+    baseURL: https://api.monoscope.tech/api/v1
     properties:
       - url: https://monoscope.tech/docs/
         type: Documentation
@@ -41,28 +63,114 @@ apis:
         type: GettingStarted
       - url: https://monoscope.tech/docs/sdks/
         type: SDK
+      - url: https://monoscope.tech/docs/api-reference/
+        type: APIReference
+      - url: https://monoscope.tech/docs/api-reference/getting-started/authentication/
+        type: Authentication
+      - url: https://monoscope.tech/docs/api-reference/getting-started/rate-limits/
+        type: RateLimits
+      - url: https://monoscope.tech/docs/glossary/
+        type: Glossary
       - url: https://monoscope.tech/docs/faqs/
         type: FAQ
-      - url: https://monoscope.tech/features/api-observability/
-        type: APIReference
+      - url: openapi/monoscope-platform-openapi.yml
+        type: OpenAPI
+      - url: rules/monoscope-platform-rules.yml
+        type: SpectralRules
+      - url: capabilities/monoscope-platform.yaml
+        type: Capabilities
+      - url: vocabulary/apitoolkit-vocabulary.yml
+        type: Vocabulary
+      - url: json-ld/apitoolkit-context.jsonld
+        type: JSONLD
     description: >-
-      Monoscope (formerly APIToolkit) is an API observability and monitoring platform
-      that catches breaking changes and critical errors in real-time. It provides unified
-      logs and traces, API analytics, breaking change detection, custom metrics, smart
-      alerts, screen replay, AI-powered querying, and a dynamic API catalog. Supports
-      780+ integrations via OpenTelemetry including Node.js, Python, Go, Java, .NET,
-      PHP, and Ruby SDKs.
+      The Monoscope Platform REST API lets teams programmatically query metrics,
+      retrieve telemetry schemas, and manage monitors per project. Authentication
+      is via project-scoped Bearer API keys. Companion surfaces include native
+      OpenTelemetry SDKs for 17+ frameworks, a CLI, a hosted MCP server, and
+      Claude Code skills.
+  - aid: apitoolkit:monoscope-mcp
+    name: Monoscope MCP Server
+    tags:
+      - AI Observability
+      - LLM Observability
+      - MCP Server
+      - Observability
+    humanURL: https://monoscope.tech/docs/api-reference/mcp-server/
+    properties:
+      - url: https://monoscope.tech/docs/api-reference/mcp-server/
+        type: Documentation
+      - url: https://github.com/monoscope-tech/skills
+        type: SourceCode
+    description: >-
+      Hosted Model Context Protocol endpoint exposing approximately 50
+      auto-derived REST tools plus workflow tools (analyze_issue,
+      find_error_patterns, search_events_nl) under the same Bearer API key as
+      the REST API. Lets any MCP-compatible LLM client drive observability
+      workflows.
+  - aid: apitoolkit:monoscope-cli
+    name: Monoscope CLI
+    tags:
+      - CLI
+      - Observability
+    humanURL: https://monoscope.tech/docs/onboarding/cli/
+    properties:
+      - url: https://monoscope.tech/docs/onboarding/cli/
+        type: Documentation
+    description: >-
+      Terminal-based client for Monoscope. Same auth, same primitives, same JSON
+      as the REST API and MCP server. Drives investigate, triage, KQL, and
+      instrumentation workflows from the shell.
+  - aid: apitoolkit:testkit
+    name: Testkit (YAML API Testing DSL)
+    tags:
+      - API Testing
+      - Browser Automation
+      - CLI
+    humanURL: https://github.com/monoscope-tech/testkit
+    properties:
+      - url: https://github.com/monoscope-tech/testkit
+        type: SourceCode
+    description: >-
+      MIT-licensed Rust testing tool by the APItoolkit/Monoscope team that uses
+      a simplified YAML DSL for defining API test scenarios and browser
+      automation. Scripts persist in version control and can serve as both
+      individual tests and load tests.
+  - aid: apitoolkit:timefusion
+    name: TimeFusion (Timeseries Engine)
+    tags:
+      - Database
+      - Open Source
+      - Storage
+    humanURL: https://github.com/monoscope-tech/timefusion
+    properties:
+      - url: https://github.com/monoscope-tech/timefusion
+        type: SourceCode
+    description: >-
+      Rust-based timeseries database for events, logs, traces, and metrics using
+      a PostgreSQL dialect over S3 / Delta Lake storage. Underpins Monoscope's
+      affordable long-term retention and self-hosted offering.
 common:
   - type: Documentation
     url: https://monoscope.tech/docs/
   - type: GettingStarted
     url: https://monoscope.tech/docs/onboarding/
+  - type: APIReference
+    url: https://monoscope.tech/docs/api-reference/
+  - type: Authentication
+    url: https://monoscope.tech/docs/api-reference/getting-started/authentication/
+  - type: RateLimits
+    url: https://monoscope.tech/docs/api-reference/getting-started/rate-limits/
   - type: SDK
     url: https://monoscope.tech/docs/sdks/
   - type: Pricing
     url: https://monoscope.tech/pricing/
   - type: StatusPage
     url: https://status.monoscope.tech/
+  - type: Blog
+    url: https://monoscope.tech/blog/
+  - type: Integrations
+    url: https://monoscope.tech/integrations/
   - type: GitHubOrganization
     url: https://github.com/monoscope-tech
   - type: X
@@ -75,34 +183,54 @@ common:
     url: https://monoscope.tech/docs/faqs/
   - type: Glossary
     url: https://monoscope.tech/docs/glossary/
+  - type: SourceCode
+    url: https://github.com/monoscope-tech/monoscope
+  - type: License
+    name: AGPL-3.0 (community edition); commercial license available
+  - type: Plans
+    url: plans/apitoolkit-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/apitoolkit-rate-limits.yml
+  - type: FinOps
+    url: finops/apitoolkit-finops.yml
   - type: Features
     data:
       - name: Error Tracking
-        description: Catch breaking changes and critical errors in real-time before customers notice.
+        description: Catch breaking changes and critical errors in real time before customers notice.
       - name: Logs and Traces
         description: Unified view correlating logs with trace breakdowns and request timelines.
       - name: API Analytics
         description: Identify trends and monitor API performance metrics that matter to your business.
-      - name: API Management
-        description: Organize and manage APIs with dynamic catalog and documentation.
-      - name: Custom Metrics
-        description: Track business KPIs and technical metrics without complexity.
-      - name: Dashboards
-        description: Pre-built templates customizable to specific tech stacks.
+      - name: API Catalog and Docs
+        description: Dynamic catalog with up-to-date documentation and developer onboarding.
+      - name: Metrics and Dashboards
+        description: Custom metrics tracking with real-time data visualization, pre-built templates per stack.
       - name: Performance Monitoring
         description: Monitor APIs, databases, and services with uptime tracking.
-      - name: Smart Alerts
-        description: Intelligent notifications that adapt to traffic patterns.
-      - name: Screen Replay
-        description: Watch user sessions that triggered errors for root cause analysis.
-      - name: AI-Powered Query
-        description: Ask questions in plain English and get instant answers from your API data.
+      - name: Monitors and Healthchecks
+        description: Automated uptime tracking and early failure detection with threshold and interval-based monitors.
+      - name: Alerts and Notifications
+        description: Real-time alerts routed to Slack, PagerDuty, email, and webhooks.
+      - name: Anomaly Detection
+        description: Real-time API change detection and automated monitoring of unusual traffic.
       - name: Breaking Change Detection
-        description: Identify API changes and anomalies in real-time.
+        description: Identify API schema and contract changes in real time.
+      - name: Session Replay
+        description: Watch user sessions that triggered errors for root-cause analysis.
+      - name: AI-Powered Natural Language Query
+        description: Ask questions in plain English via search_events_nl and get instant answers from API data.
+      - name: AI Agents
+        description: AI agents analyze logs, metrics, events, and API traffic in real time for anomaly detection.
       - name: Weekly Reports
-        description: Summaries of new errors, regressions, and anomalies.
-      - name: CLI Tools
-        description: Terminal-based querying and management tools for developers.
+        description: AI-generated summaries of new errors, regressions, and anomalies.
+      - name: MCP Server
+        description: Hosted Model Context Protocol endpoint with ~50 auto-derived REST tools and workflow tools.
+      - name: Claude Code Skills
+        description: Drop-in skills (investigate, triage, kql-reference, instrument) wrapping the CLI for Claude Code.
+      - name: CLI
+        description: Terminal-based queries, log tailing, request tracing, and resource management.
+      - name: KQL Query Language
+        description: Kusto-style query language for searching events, logs, and traces with operators and aggregations.
   - type: UseCases
     data:
       - name: Real-Time Error Detection
@@ -112,47 +240,140 @@ common:
       - name: Third-Party Integration Monitoring
         description: Monitor third-party API dependencies and detect breaking changes automatically.
       - name: Incident Response
-        description: Correlate logs, traces, and errors for faster root cause analysis and incident resolution.
+        description: Correlate logs, traces, and errors for faster root-cause analysis and incident resolution.
       - name: API Contract Monitoring
         description: Continuously monitor API contracts for compliance and detect schema drift.
+      - name: Agent-Driven Observability
+        description: Let LLM agents query, triage, and remediate via the MCP server and Claude Code skills.
+      - name: API Testing in CI
+        description: Run Testkit YAML scenarios against APIs as part of CI pipelines and load testing.
   - type: Integrations
     data:
       - name: Node.js
-        description: SDK for monitoring Node.js backends and APIs.
+        description: SDK with Express, Fastify, NestJS, Next.js, and AdonisJS framework adapters.
       - name: Python
-        description: SDK for monitoring Python backends and APIs.
+        description: SDK with Django, FastAPI, Flask, and Pyramid framework adapters.
       - name: Go
-        description: SDK for monitoring Go backends and APIs.
+        description: SDK with Gin, Echo, Fiber, Chi, Gorilla Mux, and native net/http adapters.
       - name: Java
-        description: SDK for monitoring Java backends and APIs.
+        description: SDK with Spring Boot integration.
       - name: .NET
-        description: SDK for monitoring .NET backends and APIs.
+        description: SDK for ASP.NET Core.
       - name: PHP
-        description: SDK for monitoring PHP backends and APIs.
-      - name: Ruby
-        description: SDK for monitoring Ruby backends and APIs.
+        description: SDK with Laravel, Symfony, and Slim adapters.
+      - name: Elixir
+        description: SDK with Phoenix framework integration.
+      - name: Browser / Web
+        description: Browser SDK for OpenTelemetry instrumentation, React/Next.js, and session replays.
+      - name: Flutter
+        description: Mobile OpenTelemetry instrumentation.
       - name: PostgreSQL
-        description: Database monitoring integration for PostgreSQL.
+        description: Database instrumentation for PostgreSQL.
       - name: MongoDB
-        description: Database monitoring integration for MongoDB.
+        description: Database instrumentation for MongoDB.
+      - name: MySQL
+        description: Database instrumentation for MySQL.
+      - name: Redis
+        description: Database instrumentation for Redis.
+      - name: Elasticsearch
+        description: Search and analytics datastore instrumentation.
+      - name: Apache Kafka
+        description: Messaging and streaming instrumentation.
+      - name: RabbitMQ
+        description: Messaging broker instrumentation.
+      - name: Kubernetes
+        description: Infrastructure instrumentation for Kubernetes, including OpenTelemetry Operator.
+      - name: Docker
+        description: Container runtime instrumentation.
+      - name: NGINX
+        description: Reverse proxy and web server instrumentation.
+      - name: HAProxy
+        description: Load balancer instrumentation.
       - name: AWS
-        description: Cloud platform integration for Amazon Web Services.
+        description: Cloud platform integration (with optional S3 bring-your-own bucket for storage).
       - name: Google Cloud
         description: Cloud platform integration for Google Cloud Platform.
       - name: Azure
         description: Cloud platform integration for Microsoft Azure.
-      - name: Kubernetes
-        description: Infrastructure monitoring integration for Kubernetes.
-      - name: Docker
-        description: Container monitoring integration for Docker.
+      - name: Prometheus
+        description: Metrics integration for Prometheus.
+      - name: Jaeger
+        description: Tracing integration for Jaeger.
+      - name: Zipkin
+        description: Tracing integration for Zipkin.
       - name: Datadog
         description: APM platform integration for forwarding data to Datadog.
       - name: New Relic
         description: APM platform integration for forwarding data to New Relic.
-      - name: Prometheus
-        description: Metrics integration for Prometheus monitoring.
-  - type: Integrations
-    url: https://monoscope.tech/integrations
+      - name: Splunk
+        description: Observability platform integration.
+      - name: OpenTelemetry
+        description: Native OpenTelemetry collector and exporter support backing 780+ integrations.
+      - name: Slack
+        description: Alert and notification routing.
+      - name: PagerDuty
+        description: Incident management routing.
+      - name: MCP / Model Context Protocol
+        description: Native MCP server exposing tools to any compatible LLM client.
+      - name: Claude Code
+        description: Drop-in Claude Code skills for investigate, triage, KQL reference, and instrument workflows.
+  - type: SDK
+    data:
+      - name: monoscope-go
+        url: https://github.com/monoscope-tech/monoscope-go
+        description: Go SDK with Gin, Echo, Fiber, Chi, Gorilla Mux, and native net/http adapters. MIT.
+      - name: monoscope-python
+        url: https://github.com/monoscope-tech/monoscope-python
+        description: Python SDK with Django, FastAPI, Flask, and Pyramid adapters. MIT.
+      - name: monoscope-js
+        url: https://github.com/monoscope-tech/monoscope-js
+        description: Shared TypeScript code backing Node/Browser framework SDKs.
+      - name: monoscope-laravel
+        url: https://github.com/monoscope-tech/monoscope-laravel
+        description: Laravel / PHP client SDK.
+      - name: monoscope-web
+        url: https://github.com/monoscope-tech/monoscope-web
+        description: Browser SDK for OpenTelemetry instrumentation and session replays.
+      - name: apitoolkit-dotnet
+        url: https://github.com/monoscope-tech/apitoolkit-dotnet
+        description: .NET SDK for ASP.NET Core.
+  - type: Tools
+    data:
+      - name: monoscope (platform)
+        url: https://github.com/monoscope-tech/monoscope
+        description: Open-source Haskell observability platform with S3-native storage and NL querying. AGPL-3.0.
+      - name: TimeFusion
+        url: https://github.com/monoscope-tech/timefusion
+        description: Rust timeseries database (PostgreSQL dialect + S3/Delta Lake) underpinning long-term retention.
+      - name: Testkit
+        url: https://github.com/monoscope-tech/testkit
+        description: Rust YAML-based DSL for API testing and browser automation. MIT.
+      - name: Monoscope CLI
+        url: https://monoscope.tech/docs/onboarding/cli/
+        description: Terminal client sharing auth and primitives with the REST API and MCP server.
+      - name: Claude Code Skills
+        url: https://github.com/monoscope-tech/skills
+        description: investigate, triage, kql-reference, instrument skills wrapping the monoscope CLI.
+      - name: OpenTelemetry Demo
+        url: https://github.com/monoscope-tech/opentelemetry-demo
+        description: Demo deployment showing OpenTelemetry integration patterns.
+  - type: Blog
+    data:
+      - name: 'Monoscope 2025: A Year in Review'
+        date: '2025-12-17'
+        author: Anthony Alaribe
+      - name: 'Deep Dive into API Traces: How monoscope Captures and Displays Them'
+        date: '2025-09-17'
+        author: Patrick Odey
+      - name: '5 Common API Issues (and How to Fix Them)'
+        date: '2025-03-21'
+        author: Patrick Odey
+      - name: Add monoscope To Your Next.js Application In 5 Minutes
+        date: '2025-03-06'
+        author: Patrick Odey
+      - name: Monitoring your Express.js application using OpenTelemetry with monoscope
+        date: '2025-02-27'
+        author: Patrick Odey
 integrations:
   - name: Test JSON Redaction
 maintainers:

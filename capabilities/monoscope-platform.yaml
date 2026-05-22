@@ -1,0 +1,38 @@
+apiVersion: naftiko.dev/v1
+kind: Capability
+metadata:
+  name: monoscope-platform
+  provider: apitoolkit
+  api: monoscope-platform
+  tags:
+    - Observability
+    - API Monitoring
+    - Metrics
+    - Monitors
+    - Error Tracking
+spec:
+  description: >-
+    Shared per-API capability surface for the Monoscope Platform REST API.
+    Wraps the three documented endpoints (metrics, schema, monitors) plus the
+    MCP server surface so agents and workflows can query observability data
+    with the same Bearer API key.
+  baseUrl: https://api.monoscope.tech/api/v1
+  auth:
+    type: bearer
+    description: Project-scoped Bearer API key.
+  operations:
+    - id: queryMetrics
+      summary: Query Metrics
+      method: GET
+      path: /metrics
+      tags: [Metrics]
+    - id: getTelemetrySchema
+      summary: Get Telemetry Schema
+      method: GET
+      path: /schema
+      tags: [Schema]
+    - id: listMonitors
+      summary: List Monitors
+      method: GET
+      path: /monitors
+      tags: [Monitors]

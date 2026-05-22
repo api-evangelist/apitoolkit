@@ -1,0 +1,9 @@
+{
+  "name": "MetricPoint",
+  "description": "Structure of a single timeseries metric point.",
+  "fields": [
+    { "name": "timestamp", "type": "datetime", "required": true, "description": "ISO 8601 timestamp." },
+    { "name": "value", "type": "number", "required": true, "description": "Metric value at the timestamp." },
+    { "name": "labels", "type": "map<string,string>", "required": false, "description": "Dimension labels (service, route, status_code, etc)." }
+  ]
+}

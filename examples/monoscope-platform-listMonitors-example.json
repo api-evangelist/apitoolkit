@@ -1,0 +1,38 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.monoscope.tech/api/v1/monitors?pid=550e8400-e29b-41d4-a716-446655440000&filter=active&since=7d",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "monitors": [
+        {
+          "id": "8c2a7f24-1b40-4dca-9ad9-31d2b4f3e9a1",
+          "name": "Checkout p95 latency above 500ms",
+          "status": "active",
+          "query": "p95(http.server.duration{service=\"checkout-api\"})",
+          "threshold": { "operator": ">", "value": 500 },
+          "interval": "5m",
+          "notification_channels": ["slack-oncall", "pagerduty-checkout"],
+          "created_at": "2026-04-12T18:24:11Z",
+          "updated_at": "2026-05-20T09:02:44Z"
+        },
+        {
+          "id": "1f8e9b2d-7c3a-46f0-9a17-2c6b1ad24bc4",
+          "name": "5xx error rate above 1%",
+          "status": "triggered",
+          "query": "ratio(errors{status_code>=500}, requests)",
+          "threshold": { "operator": ">=", "value": 0.01 },
+          "interval": "1m",
+          "notification_channels": ["pagerduty-platform"],
+          "created_at": "2026-02-03T12:00:00Z",
+          "updated_at": "2026-05-22T10:14:08Z"
+        }
+      ]
+    }
+  }
+}

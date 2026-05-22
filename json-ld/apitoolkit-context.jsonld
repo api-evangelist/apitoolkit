@@ -1,0 +1,47 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "monoscope": "https://monoscope.tech/vocab#",
+    "otel": "https://opentelemetry.io/vocab#",
+
+    "Project": "monoscope:Project",
+    "Monitor": "monoscope:Monitor",
+    "MetricPoint": "monoscope:MetricPoint",
+    "SchemaField": "monoscope:SchemaField",
+    "Service": "monoscope:Service",
+    "Span": "otel:Span",
+    "Trace": "otel:Trace",
+    "Log": "otel:Log",
+
+    "id": "@id",
+    "name": "schema:name",
+    "description": "schema:description",
+    "status": "monoscope:status",
+    "query": "monoscope:query",
+    "threshold": "monoscope:threshold",
+    "operator": "monoscope:operator",
+    "value": "monoscope:value",
+    "interval": "monoscope:interval",
+    "notification_channels": "monoscope:notificationChannel",
+
+    "timestamp": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+
+    "labels": "monoscope:label",
+    "cardinality": "monoscope:cardinality",
+    "type": "schema:additionalType",
+    "fields": "monoscope:field",
+    "series": "monoscope:series",
+    "metadata": "monoscope:metadata"
+  }
+}

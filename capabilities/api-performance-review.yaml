@@ -1,0 +1,36 @@
+apiVersion: naftiko.dev/v1
+kind: CapabilityWorkflow
+metadata:
+  name: api-performance-review
+  provider: apitoolkit
+  tags:
+    - API Analytics
+    - Observability
+    - Reporting
+spec:
+  description: >-
+    Generate a weekly API performance review by querying p95 latency,
+    error rate, and throughput from Monoscope and pairing them with the
+    current active monitors.
+  steps:
+    - id: latency
+      capability: monoscope-platform.queryMetrics
+      input:
+        pid: ${context.projectId}
+        data_type: timeseries
+        query: p95(http.server.duration)
+        since: 7d
+        source: http
+    - id: errors
+      capability: monoscope-platform.queryMetrics
+      input:
+        pid: ${context.projectId}
+        data_type: aggregate
+        query: rate(errors)
+        since: 7d
+        source: http
+    - id: active-monitors
+      capability: monoscope-platform.listMonitors
+      input:
+        pid: ${context.projectId}
+        filter: active

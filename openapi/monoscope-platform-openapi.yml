@@ -1,0 +1,297 @@
+openapi: 3.1.0
+info:
+  title: Monoscope Platform API
+  version: "1.0.0"
+  description: |
+    The Monoscope (formerly APIToolkit) Platform REST API lets you
+    programmatically query metrics, retrieve telemetry schemas, and manage
+    monitors for your projects. Endpoints and shapes here mirror the public
+    API reference at https://monoscope.tech/docs/api-reference/. Authentication
+    is via project-scoped Bearer API keys.
+  contact:
+    name: Monoscope
+    url: https://monoscope.tech/
+    email: hello@monoscope.tech
+  license:
+    name: AGPL-3.0 (community edition) / Commercial
+    identifier: AGPL-3.0-only
+servers:
+  - url: https://api.monoscope.tech/api/v1
+    description: Monoscope Cloud production API
+security:
+  - bearerAuth: []
+tags:
+  - name: Metrics
+    description: Query timeseries and aggregate metric data.
+  - name: Schema
+    description: Retrieve telemetry field schema for a project.
+  - name: Monitors
+    description: List monitors and their evaluation status.
+paths:
+  /metrics:
+    get:
+      tags:
+        - Metrics
+      summary: Query Metrics
+      description: |
+        Query metrics for a project using either a predefined metric query
+        expression or raw SQL. Supports relative (`since`) or absolute
+        (`from`/`to`) time ranges, and a `source` filter for `http`, `logs`,
+        or `traces` data.
+      operationId: queryMetrics
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+        - name: data_type
+          in: query
+          description: Category of metric information to return.
+          schema:
+            type: string
+            enum: [timeseries, aggregate]
+        - name: query
+          in: query
+          description: Predefined metric query expression.
+          schema:
+            type: string
+        - name: query_sql
+          in: query
+          description: Advanced querying using raw SQL syntax.
+          schema:
+            type: string
+        - name: since
+          in: query
+          description: Relative time specification (e.g. `1h`, `24h`, `7d`).
+          schema:
+            type: string
+        - name: from
+          in: query
+          description: Beginning point for absolute time range (ISO 8601).
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          description: Ending point for absolute time range (ISO 8601).
+          schema:
+            type: string
+            format: date-time
+        - name: source
+          in: query
+          description: Metric origin filter.
+          schema:
+            type: string
+            enum: [http, logs, traces]
+      responses:
+        '200':
+          description: Metric series and metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /schema:
+    get:
+      tags:
+        - Schema
+      summary: Get Telemetry Schema
+      description: Retrieve the telemetry field schema for a project.
+      operationId: getTelemetrySchema
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: List of telemetry fields with types and estimated cardinality.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /monitors:
+    get:
+      tags:
+        - Monitors
+      summary: List Monitors
+      description: List monitors and their evaluation status for a project.
+      operationId: listMonitors
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+        - name: filter
+          in: query
+          description: Filter monitors by status.
+          schema:
+            type: string
+            enum: [active, paused, triggered]
+        - name: since
+          in: query
+          description: Relative time range for monitor history (e.g. `24h`, `7d`).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of monitor objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: |
+        Project-scoped Bearer API key. Create via Settings > API Keys in the
+        Monoscope dashboard; keys are shown once and are scoped to a single
+        project.
+  parameters:
+    ProjectId:
+      name: pid
+      in: query
+      required: true
+      description: Project ID (UUID) to scope the request.
+      schema:
+        type: string
+        format: uuid
+  responses:
+    Unauthorized:
+      description: Missing or invalid Bearer API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded for this API key.
+      headers:
+        X-RateLimit-Limit:
+          schema: { type: integer }
+        X-RateLimit-Remaining:
+          schema: { type: integer }
+        X-RateLimit-Reset:
+          schema: { type: integer }
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    MetricsResponse:
+      type: object
+      required: [series, metadata]
+      properties:
+        series:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricPoint'
+        metadata:
+          $ref: '#/components/schemas/MetricsMetadata'
+    MetricPoint:
+      type: object
+      required: [timestamp, value]
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        value:
+          type: number
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+    MetricsMetadata:
+      type: object
+      properties:
+        query:
+          type: string
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+        resolution:
+          type: string
+    SchemaResponse:
+      type: object
+      required: [fields]
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaField'
+    SchemaField:
+      type: object
+      required: [name, type]
+      properties:
+        name:
+          type: string
+          description: Fully qualified field name.
+        type:
+          type: string
+          enum: [string, number, boolean, timestamp]
+        cardinality:
+          type: integer
+          description: Estimated unique values count.
+    MonitorsResponse:
+      type: object
+      required: [monitors]
+      properties:
+        monitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Monitor'
+    Monitor:
+      type: object
+      required: [id, name, status, query, threshold, interval]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        status:
+          type: string
+          enum: [active, paused, triggered]
+        query:
+          type: string
+          description: The metric query this monitor evaluates.
+        threshold:
+          $ref: '#/components/schemas/MonitorThreshold'
+        interval:
+          type: string
+          description: Evaluation interval (e.g. `5m`, `1h`).
+        notification_channels:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    MonitorThreshold:
+      type: object
+      required: [operator, value]
+      properties:
+        operator:
+          type: string
+          enum: [">", ">=", "<", "<=", "=="]
+        value:
+          type: number
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        request_id:
+          type: string
