@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Monoscope Platform API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monoscope.tech/api/v1/metrics",
+            "params": [
+              {
+                "name": "pid",
+                "value": "",
+                "type": "query",
+                "description": "Project ID (UUID) to scope the request."
+              },
+              {
+                "name": "data_type",
+                "value": "",
+                "type": "query",
+                "description": "Category of metric information to return."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Predefined metric query expression."
+              },
+              {
+                "name": "query_sql",
+                "value": "",
+                "type": "query",
+                "description": "Advanced querying using raw SQL syntax."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Relative time specification (e.g. `1h`, `24h`, `7d`)."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Beginning point for absolute time range (ISO 8601)."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Ending point for absolute time range (ISO 8601)."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Metric origin filter."
+              }
+            ]
+          },
+          "docs": "Query metrics for a project using either a predefined metric query\nexpression or raw SQL. Supports relative (`since`) or absolute\n(`from`/`to`) time ranges, and a `source` filter for `http`, `logs`,\nor `traces` data.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Schema",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Telemetry Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monoscope.tech/api/v1/schema",
+            "params": [
+              {
+                "name": "pid",
+                "value": "",
+                "type": "query",
+                "description": "Project ID (UUID) to scope the request."
+              }
+            ]
+          },
+          "docs": "Retrieve the telemetry field schema for a project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Monitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monoscope.tech/api/v1/monitors",
+            "params": [
+              {
+                "name": "pid",
+                "value": "",
+                "type": "query",
+                "description": "Project ID (UUID) to scope the request."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter monitors by status."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Relative time range for monitor history (e.g. `24h`, `7d`)."
+              }
+            ]
+          },
+          "docs": "List monitors and their evaluation status for a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
