@@ -62,7 +62,7 @@ apis:
       - url: https://monoscope.tech/docs/onboarding/
         type: GettingStarted
       - url: https://monoscope.tech/docs/sdks/
-        type: SDK
+        type: SDKs
       - url: https://monoscope.tech/docs/api-reference/
         type: APIReference
       - url: https://monoscope.tech/docs/api-reference/getting-started/authentication/
@@ -161,7 +161,7 @@ common:
     url: https://monoscope.tech/docs/api-reference/getting-started/authentication/
   - type: RateLimits
     url: https://monoscope.tech/docs/api-reference/getting-started/rate-limits/
-  - type: SDK
+  - type: SDKs
     url: https://monoscope.tech/docs/sdks/
   - type: Pricing
     url: https://monoscope.tech/pricing/
@@ -317,7 +317,7 @@ common:
         description: Native MCP server exposing tools to any compatible LLM client.
       - name: Claude Code
         description: Drop-in Claude Code skills for investigate, triage, KQL reference, and instrument workflows.
-  - type: SDK
+  - type: SDKs
     data:
       - name: monoscope-go
         url: https://github.com/monoscope-tech/monoscope-go
