@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/monoscope-platform-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: API Key
+  description: |-
+    Project-scoped Bearer API key. Create via Settings > API Keys in the
+    Monoscope dashboard; keys are shown once and are scoped to a single
+    project.
+  sources:
+  - openapi/monoscope-platform-openapi.yml
