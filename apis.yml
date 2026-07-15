@@ -151,6 +151,8 @@ apis:
       a PostgreSQL dialect over S3 / Delta Lake storage. Underpins Monoscope's
       affordable long-term retention and self-hosted offering.
 common:
+  - type: AgenticAccess
+    url: agentic-access/apitoolkit-agentic-access.yml
   - type: DomainSecurity
     url: security/apitoolkit-domain-security.yml
   - type: Authentication
