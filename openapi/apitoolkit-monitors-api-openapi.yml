@@ -1,0 +1,184 @@
+openapi: 3.1.0
+info:
+  title: Monoscope Platform Metrics Monitors API
+  version: 1.0.0
+  description: 'The Monoscope (formerly APIToolkit) Platform REST API lets you
+
+    programmatically query metrics, retrieve telemetry schemas, and manage
+
+    monitors for your projects. Endpoints and shapes here mirror the public
+
+    API reference at https://monoscope.tech/docs/api-reference/. Authentication
+
+    is via project-scoped Bearer API keys.
+
+    '
+  contact:
+    name: Monoscope
+    url: https://monoscope.tech/
+    email: hello@monoscope.tech
+  license:
+    name: AGPL-3.0 (community edition) / Commercial
+    identifier: AGPL-3.0-only
+servers:
+- url: https://api.monoscope.tech/api/v1
+  description: Monoscope Cloud production API
+security:
+- bearerAuth: []
+tags:
+- name: Monitors
+  description: List monitors and their evaluation status.
+paths:
+  /monitors:
+    get:
+      tags:
+      - Monitors
+      summary: List Monitors
+      description: List monitors and their evaluation status for a project.
+      operationId: listMonitors
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      - name: filter
+        in: query
+        description: Filter monitors by status.
+        schema:
+          type: string
+          enum:
+          - active
+          - paused
+          - triggered
+      - name: since
+        in: query
+        description: Relative time range for monitor history (e.g. `24h`, `7d`).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Array of monitor objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Bearer API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded for this API key.
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    MonitorThreshold:
+      type: object
+      required:
+      - operator
+      - value
+      properties:
+        operator:
+          type: string
+          enum:
+          - '>'
+          - '>='
+          - <
+          - <=
+          - ==
+        value:
+          type: number
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        request_id:
+          type: string
+    Monitor:
+      type: object
+      required:
+      - id
+      - name
+      - status
+      - query
+      - threshold
+      - interval
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - paused
+          - triggered
+        query:
+          type: string
+          description: The metric query this monitor evaluates.
+        threshold:
+          $ref: '#/components/schemas/MonitorThreshold'
+        interval:
+          type: string
+          description: Evaluation interval (e.g. `5m`, `1h`).
+        notification_channels:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    MonitorsResponse:
+      type: object
+      required:
+      - monitors
+      properties:
+        monitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Monitor'
+  parameters:
+    ProjectId:
+      name: pid
+      in: query
+      required: true
+      description: Project ID (UUID) to scope the request.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: 'Project-scoped Bearer API key. Create via Settings > API Keys in the
+
+        Monoscope dashboard; keys are shown once and are scoped to a single
+
+        project.
+
+        '

@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: Monoscope Platform Metrics Schema API
+  version: 1.0.0
+  description: 'The Monoscope (formerly APIToolkit) Platform REST API lets you
+
+    programmatically query metrics, retrieve telemetry schemas, and manage
+
+    monitors for your projects. Endpoints and shapes here mirror the public
+
+    API reference at https://monoscope.tech/docs/api-reference/. Authentication
+
+    is via project-scoped Bearer API keys.
+
+    '
+  contact:
+    name: Monoscope
+    url: https://monoscope.tech/
+    email: hello@monoscope.tech
+  license:
+    name: AGPL-3.0 (community edition) / Commercial
+    identifier: AGPL-3.0-only
+servers:
+- url: https://api.monoscope.tech/api/v1
+  description: Monoscope Cloud production API
+security:
+- bearerAuth: []
+tags:
+- name: Schema
+  description: Retrieve telemetry field schema for a project.
+paths:
+  /schema:
+    get:
+      tags:
+      - Schema
+      summary: Get Telemetry Schema
+      description: Retrieve the telemetry field schema for a project.
+      operationId: getTelemetrySchema
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: List of telemetry fields with types and estimated cardinality.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Bearer API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded for this API key.
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    SchemaField:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: Fully qualified field name.
+        type:
+          type: string
+          enum:
+          - string
+          - number
+          - boolean
+          - timestamp
+        cardinality:
+          type: integer
+          description: Estimated unique values count.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        request_id:
+          type: string
+    SchemaResponse:
+      type: object
+      required:
+      - fields
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaField'
+  parameters:
+    ProjectId:
+      name: pid
+      in: query
+      required: true
+      description: Project ID (UUID) to scope the request.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: 'Project-scoped Bearer API key. Create via Settings > API Keys in the
+
+        Monoscope dashboard; keys are shown once and are scoped to a single
+
+        project.
+
+        '
