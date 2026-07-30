@@ -23,7 +23,20 @@ tags:
   - Platform
   - Session Replay
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/apitoolkit.png
 access: 3rd-Party
 created: '2025-01-08'
 modified: '2026-05-22'
@@ -40,117 +53,167 @@ description: >-
   can drive observability from the terminal or any LLM client. The apitoolkit.io
   domain now redirects to monoscope.tech.
 apis:
-  - aid: apitoolkit:monoscope-platform
-    name: Monoscope Platform API
-    tags:
-      - API Analytics
-      - API Catalog
-      - API Monitoring
-      - Breaking Change Detection
-      - Error Tracking
-      - Logs and Traces
-      - Metrics
-      - Monitors
-      - Observability
-      - OpenTelemetry
-      - Session Replay
-    humanURL: https://monoscope.tech/
-    baseURL: https://api.monoscope.tech/api/v1
-    properties:
-      - url: https://monoscope.tech/docs/
-        type: Documentation
-      - url: https://monoscope.tech/docs/onboarding/
-        type: GettingStarted
-      - url: https://monoscope.tech/docs/sdks/
-        type: SDKs
-      - url: https://monoscope.tech/docs/api-reference/
-        type: APIReference
-      - url: https://monoscope.tech/docs/api-reference/getting-started/authentication/
-        type: Authentication
-      - url: https://monoscope.tech/docs/api-reference/getting-started/rate-limits/
-        type: RateLimits
-      - url: https://monoscope.tech/docs/glossary/
-        type: Glossary
-      - url: https://monoscope.tech/docs/faqs/
-        type: FAQ
-      - url: openapi/monoscope-platform-openapi.yml
-        type: OpenAPI
-      - url: rules/monoscope-platform-rules.yml
-        type: SpectralRules
-      - url: capabilities/monoscope-platform.yaml
-        type: Capabilities
-      - url: vocabulary/apitoolkit-vocabulary.yml
-        type: Vocabulary
-      - url: json-ld/apitoolkit-context.jsonld
-        type: JSONLD
-    description: >-
-      The Monoscope Platform REST API lets teams programmatically query metrics,
-      retrieve telemetry schemas, and manage monitors per project. Authentication
-      is via project-scoped Bearer API keys. Companion surfaces include native
-      OpenTelemetry SDKs for 17+ frameworks, a CLI, a hosted MCP server, and
-      Claude Code skills.
-  - aid: apitoolkit:monoscope-mcp
-    name: Monoscope MCP Server
-    tags:
-      - AI Observability
-      - LLM Observability
-      - MCP Server
-      - Observability
-    humanURL: https://monoscope.tech/docs/api-reference/mcp-server/
-    properties:
-      - url: https://monoscope.tech/docs/api-reference/mcp-server/
-        type: Documentation
-      - url: https://github.com/monoscope-tech/skills
-        type: SourceCode
-    description: >-
-      Hosted Model Context Protocol endpoint exposing approximately 50
-      auto-derived REST tools plus workflow tools (analyze_issue,
-      find_error_patterns, search_events_nl) under the same Bearer API key as
-      the REST API. Lets any MCP-compatible LLM client drive observability
-      workflows.
-  - aid: apitoolkit:monoscope-cli
-    name: Monoscope CLI
-    tags:
-      - CLI
-      - Observability
-    humanURL: https://monoscope.tech/docs/onboarding/cli/
-    properties:
-      - url: https://monoscope.tech/docs/onboarding/cli/
-        type: Documentation
-    description: >-
-      Terminal-based client for Monoscope. Same auth, same primitives, same JSON
-      as the REST API and MCP server. Drives investigate, triage, KQL, and
-      instrumentation workflows from the shell.
-  - aid: apitoolkit:testkit
-    name: Testkit (YAML API Testing DSL)
-    tags:
-      - API Testing
-      - Browser Automation
-      - CLI
-    humanURL: https://github.com/monoscope-tech/testkit
-    properties:
-      - url: https://github.com/monoscope-tech/testkit
-        type: SourceCode
-    description: >-
-      MIT-licensed Rust testing tool by the APItoolkit/Monoscope team that uses
-      a simplified YAML DSL for defining API test scenarios and browser
-      automation. Scripts persist in version control and can serve as both
-      individual tests and load tests.
-  - aid: apitoolkit:timefusion
-    name: TimeFusion (Timeseries Engine)
-    tags:
-      - Database
-      - Open Source
-      - Storage
-    humanURL: https://github.com/monoscope-tech/timefusion
-    properties:
-      - url: https://github.com/monoscope-tech/timefusion
-        type: SourceCode
-    description: >-
-      Rust-based timeseries database for events, logs, traces, and metrics using
-      a PostgreSQL dialect over S3 / Delta Lake storage. Underpins Monoscope's
-      affordable long-term retention and self-hosted offering.
+- aid: apitoolkit:monoscope-mcp
+  name: Monoscope MCP Server
+  tags:
+  - AI Observability
+  - LLM Observability
+  - MCP Server
+  - Observability
+  humanURL: https://monoscope.tech/docs/api-reference/mcp-server/
+  properties:
+  - url: https://monoscope.tech/docs/api-reference/mcp-server/
+    type: Documentation
+  - url: https://github.com/monoscope-tech/skills
+    type: SourceCode
+  description: >-
+    Hosted Model Context Protocol endpoint exposing approximately 50 auto-derived REST tools plus workflow
+    tools (analyze_issue, find_error_patterns, search_events_nl) under the same Bearer API key as the
+    REST API. Lets any MCP-compatible LLM client drive observability workflows.
+- aid: apitoolkit:monoscope-cli
+  name: Monoscope CLI
+  tags:
+  - CLI
+  - Observability
+  humanURL: https://monoscope.tech/docs/onboarding/cli/
+  properties:
+  - url: https://monoscope.tech/docs/onboarding/cli/
+    type: Documentation
+  description: >-
+    Terminal-based client for Monoscope. Same auth, same primitives, same JSON as the REST API and MCP
+    server. Drives investigate, triage, KQL, and instrumentation workflows from the shell.
+- aid: apitoolkit:testkit
+  name: Testkit (YAML API Testing DSL)
+  tags:
+  - API Testing
+  - Browser Automation
+  - CLI
+  humanURL: https://github.com/monoscope-tech/testkit
+  properties:
+  - url: https://github.com/monoscope-tech/testkit
+    type: SourceCode
+  description: >-
+    MIT-licensed Rust testing tool by the APItoolkit/Monoscope team that uses a simplified YAML DSL for
+    defining API test scenarios and browser automation. Scripts persist in version control and can serve
+    as both individual tests and load tests.
+- aid: apitoolkit:timefusion
+  name: TimeFusion (Timeseries Engine)
+  tags:
+  - Database
+  - Open Source
+  - Storage
+  humanURL: https://github.com/monoscope-tech/timefusion
+  properties:
+  - url: https://github.com/monoscope-tech/timefusion
+    type: SourceCode
+  description: >-
+    Rust-based timeseries database for events, logs, traces, and metrics using a PostgreSQL dialect over
+    S3 / Delta Lake storage. Underpins Monoscope's affordable long-term retention and self-hosted offering.
+- aid: apitoolkit:apitoolkit-metrics-api
+  name: APIToolkit (Monoscope) Metrics API
+  description: Query timeseries and aggregate metric data.
+  humanURL: https://monoscope.tech/
+  baseURL: https://api.monoscope.tech/api/v1
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/apitoolkit-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://monoscope.tech/docs/
+  - type: GettingStarted
+    url: https://monoscope.tech/docs/onboarding/
+  - type: SDKs
+    url: https://monoscope.tech/docs/sdks/
+  - type: APIReference
+    url: https://monoscope.tech/docs/api-reference/
+  - type: Authentication
+    url: https://monoscope.tech/docs/api-reference/getting-started/authentication/
+  - type: RateLimits
+    url: https://monoscope.tech/docs/api-reference/getting-started/rate-limits/
+  - type: Glossary
+    url: https://monoscope.tech/docs/glossary/
+  - type: FAQ
+    url: https://monoscope.tech/docs/faqs/
+  - type: SpectralRules
+    url: rules/monoscope-platform-rules.yml
+  - type: Capabilities
+    url: capabilities/monoscope-platform.yaml
+  - type: Vocabulary
+    url: vocabulary/apitoolkit-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/apitoolkit-context.jsonld
+- aid: apitoolkit:apitoolkit-monitors-api
+  name: APIToolkit (Monoscope) Monitors API
+  description: List monitors and their evaluation status.
+  humanURL: https://monoscope.tech/
+  baseURL: https://api.monoscope.tech/api/v1
+  tags:
+  - Monitors
+  properties:
+  - type: OpenAPI
+    url: openapi/apitoolkit-monitors-api-openapi.yml
+  - type: Documentation
+    url: https://monoscope.tech/docs/
+  - type: GettingStarted
+    url: https://monoscope.tech/docs/onboarding/
+  - type: SDKs
+    url: https://monoscope.tech/docs/sdks/
+  - type: APIReference
+    url: https://monoscope.tech/docs/api-reference/
+  - type: Authentication
+    url: https://monoscope.tech/docs/api-reference/getting-started/authentication/
+  - type: RateLimits
+    url: https://monoscope.tech/docs/api-reference/getting-started/rate-limits/
+  - type: Glossary
+    url: https://monoscope.tech/docs/glossary/
+  - type: FAQ
+    url: https://monoscope.tech/docs/faqs/
+  - type: SpectralRules
+    url: rules/monoscope-platform-rules.yml
+  - type: Capabilities
+    url: capabilities/monoscope-platform.yaml
+  - type: Vocabulary
+    url: vocabulary/apitoolkit-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/apitoolkit-context.jsonld
+- aid: apitoolkit:apitoolkit-schema-api
+  name: APIToolkit (Monoscope) Schema API
+  description: Retrieve telemetry field schema for a project.
+  humanURL: https://monoscope.tech/
+  baseURL: https://api.monoscope.tech/api/v1
+  tags:
+  - Schema
+  properties:
+  - type: OpenAPI
+    url: openapi/apitoolkit-schema-api-openapi.yml
+  - type: Documentation
+    url: https://monoscope.tech/docs/
+  - type: GettingStarted
+    url: https://monoscope.tech/docs/onboarding/
+  - type: SDKs
+    url: https://monoscope.tech/docs/sdks/
+  - type: APIReference
+    url: https://monoscope.tech/docs/api-reference/
+  - type: Authentication
+    url: https://monoscope.tech/docs/api-reference/getting-started/authentication/
+  - type: RateLimits
+    url: https://monoscope.tech/docs/api-reference/getting-started/rate-limits/
+  - type: Glossary
+    url: https://monoscope.tech/docs/glossary/
+  - type: FAQ
+    url: https://monoscope.tech/docs/faqs/
+  - type: SpectralRules
+    url: rules/monoscope-platform-rules.yml
+  - type: Capabilities
+    url: capabilities/monoscope-platform.yaml
+  - type: Vocabulary
+    url: vocabulary/apitoolkit-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/apitoolkit-context.jsonld
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/apitoolkit-monoscope/overview
   - type: AgenticAccess
     url: agentic-access/apitoolkit-agentic-access.yml
   - type: DomainSecurity
