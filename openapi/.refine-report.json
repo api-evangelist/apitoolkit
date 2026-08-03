@@ -1,0 +1,18 @@
+{
+  "provider": "apitoolkit",
+  "sources": [
+    "apitoolkit-metrics-api-openapi.yml",
+    "apitoolkit-monitors-api-openapi.yml",
+    "apitoolkit-schema-api-openapi.yml"
+  ],
+  "outputs": [
+    "apitoolkit-metrics-api-openapi.yml",
+    "apitoolkit-monitors-api-openapi.yml",
+    "apitoolkit-schema-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

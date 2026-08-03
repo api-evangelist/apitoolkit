@@ -1,0 +1,291 @@
+{
+  "info": {
+    "_postman_id": "15774b09-b217-4c62-a00a-9e4453d2bb90",
+    "name": "Monoscope Platform Metrics Monitors API",
+    "description": "The Monoscope (formerly APIToolkit) Platform REST API lets you\nprogrammatically query metrics, retrieve telemetry schemas, and manage\nmonitors for your projects. Endpoints and shapes here mirror the public\nAPI reference at https://monoscope.tech/docs/api-reference/. Authentication\nis via project-scoped Bearer API keys.\n\n\nContact Support:\n Name: Monoscope\n Email: hello@monoscope.tech",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:02:44.000Z",
+    "updatedAt": "2026-07-28T01:02:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-15774b09-b217-4c62-a00a-9e4453d2bb90"
+  },
+  "item": [
+    {
+      "name": "monitors",
+      "item": [
+        {
+          "name": "List Monitors",
+          "id": "75945a59-fa29-4c8c-984f-5fa9ecb25fcf",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/monitors?pid=<uuid>&filter=triggered&since=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "monitors"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Project ID (UUID) to scope the request.",
+                  "key": "pid",
+                  "value": "<uuid>"
+                },
+                {
+                  "description": "Filter monitors by status.",
+                  "key": "filter",
+                  "value": "triggered"
+                },
+                {
+                  "description": "Relative time range for monitor history (e.g. `24h`, `7d`).",
+                  "key": "since",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "List monitors and their evaluation status for a project."
+          },
+          "response": [
+            {
+              "id": "5ac8c039-f83f-4489-b178-4f5789d02e5c",
+              "name": "Array of monitor objects.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/monitors?pid=<uuid>&filter=triggered&since=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "monitors"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID (UUID) to scope the request.",
+                      "key": "pid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "Filter monitors by status.",
+                      "key": "filter",
+                      "value": "triggered"
+                    },
+                    {
+                      "description": "Relative time range for monitor history (e.g. `24h`, `7d`).",
+                      "key": "since",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"monitors\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"status\": \"triggered\",\n      \"query\": \"<string>\",\n      \"threshold\": {\n        \"operator\": \"<\",\n        \"value\": \"<number>\"\n      },\n      \"interval\": \"<string>\",\n      \"notification_channels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"status\": \"triggered\",\n      \"query\": \"<string>\",\n      \"threshold\": {\n        \"operator\": \"==\",\n        \"value\": \"<number>\"\n      },\n      \"interval\": \"<string>\",\n      \"notification_channels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:02:44.000Z",
+              "updatedAt": "2026-07-28T01:02:44.000Z",
+              "uid": "35240-5ac8c039-f83f-4489-b178-4f5789d02e5c"
+            },
+            {
+              "id": "e7f017ff-53e9-4e9f-b87c-2c6a8abb1d4f",
+              "name": "Missing or invalid Bearer API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/monitors?pid=<uuid>&filter=triggered&since=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "monitors"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID (UUID) to scope the request.",
+                      "key": "pid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "Filter monitors by status.",
+                      "key": "filter",
+                      "value": "triggered"
+                    },
+                    {
+                      "description": "Relative time range for monitor history (e.g. `24h`, `7d`).",
+                      "key": "since",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:02:44.000Z",
+              "updatedAt": "2026-07-28T01:02:44.000Z",
+              "uid": "35240-e7f017ff-53e9-4e9f-b87c-2c6a8abb1d4f"
+            },
+            {
+              "id": "531c66e7-416c-4062-a36d-6721238fa819",
+              "name": "Rate limit exceeded for this API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/monitors?pid=<uuid>&filter=triggered&since=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "monitors"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID (UUID) to scope the request.",
+                      "key": "pid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "Filter monitors by status.",
+                      "key": "filter",
+                      "value": "triggered"
+                    },
+                    {
+                      "description": "Relative time range for monitor history (e.g. `24h`, `7d`).",
+                      "key": "since",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Remaining",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Reset",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:02:44.000Z",
+              "updatedAt": "2026-07-28T01:02:44.000Z",
+              "uid": "35240-531c66e7-416c-4062-a36d-6721238fa819"
+            }
+          ],
+          "createdAt": "2026-07-28T01:02:44.000Z",
+          "updatedAt": "2026-07-28T01:02:44.000Z",
+          "uid": "35240-75945a59-fa29-4c8c-984f-5fa9ecb25fcf"
+        }
+      ],
+      "id": "06aa7ec7-00d5-47bf-a166-e76c3fd833e7",
+      "createdAt": "2026-07-28T01:02:44.000Z",
+      "updatedAt": "2026-07-28T01:02:44.000Z",
+      "uid": "35240-06aa7ec7-00d5-47bf-a166-e76c3fd833e7"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.monoscope.tech/api/v1"
+    }
+  ]
+}

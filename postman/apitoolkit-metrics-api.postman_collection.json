@@ -1,0 +1,391 @@
+{
+  "info": {
+    "_postman_id": "4c5e9483-3143-42dc-a6ee-5ef73446b07b",
+    "name": "Monoscope Platform Metrics API",
+    "description": "The Monoscope (formerly APIToolkit) Platform REST API lets you\nprogrammatically query metrics, retrieve telemetry schemas, and manage\nmonitors for your projects. Endpoints and shapes here mirror the public\nAPI reference at https://monoscope.tech/docs/api-reference/. Authentication\nis via project-scoped Bearer API keys.\n\n\nContact Support:\n Name: Monoscope\n Email: hello@monoscope.tech",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:02:41.000Z",
+    "updatedAt": "2026-07-28T01:02:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4c5e9483-3143-42dc-a6ee-5ef73446b07b"
+  },
+  "item": [
+    {
+      "name": "metrics",
+      "item": [
+        {
+          "name": "Query Metrics",
+          "id": "6f39389d-f8a9-4f56-a709-1b346f10f1dc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/metrics?pid=<uuid>&data_type=aggregate&query=<string>&query_sql=<string>&since=<string>&from=<dateTime>&to=<dateTime>&source=http",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "metrics"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Project ID (UUID) to scope the request.",
+                  "key": "pid",
+                  "value": "<uuid>"
+                },
+                {
+                  "description": "Category of metric information to return.",
+                  "key": "data_type",
+                  "value": "aggregate"
+                },
+                {
+                  "description": "Predefined metric query expression.",
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Advanced querying using raw SQL syntax.",
+                  "key": "query_sql",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Relative time specification (e.g. `1h`, `24h`, `7d`).",
+                  "key": "since",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Beginning point for absolute time range (ISO 8601).",
+                  "key": "from",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "Ending point for absolute time range (ISO 8601).",
+                  "key": "to",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "Metric origin filter.",
+                  "key": "source",
+                  "value": "http"
+                }
+              ]
+            },
+            "description": "Query metrics for a project using either a predefined metric query\nexpression or raw SQL. Supports relative (`since`) or absolute\n(`from`/`to`) time ranges, and a `source` filter for `http`, `logs`,\nor `traces` data.\n"
+          },
+          "response": [
+            {
+              "id": "4bfc4f07-c144-4610-bfa7-6aba6cc77ba8",
+              "name": "Metric series and metadata.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/metrics?pid=<uuid>&data_type=aggregate&query=<string>&query_sql=<string>&since=<string>&from=<dateTime>&to=<dateTime>&source=http",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "metrics"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID (UUID) to scope the request.",
+                      "key": "pid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "Category of metric information to return.",
+                      "key": "data_type",
+                      "value": "aggregate"
+                    },
+                    {
+                      "description": "Predefined metric query expression.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Advanced querying using raw SQL syntax.",
+                      "key": "query_sql",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Relative time specification (e.g. `1h`, `24h`, `7d`).",
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Beginning point for absolute time range (ISO 8601).",
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Ending point for absolute time range (ISO 8601).",
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Metric origin filter.",
+                      "key": "source",
+                      "value": "http"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"series\": [\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"value\": \"<number>\",\n      \"labels\": {\n        \"mollitd5d\": \"<string>\"\n      }\n    },\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"value\": \"<number>\",\n      \"labels\": {\n        \"voluptate_e1d\": \"<string>\",\n        \"ea8ad\": \"<string>\",\n        \"sed_27\": \"<string>\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"query\": \"<string>\",\n    \"from\": \"<dateTime>\",\n    \"to\": \"<dateTime>\",\n    \"resolution\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:02:42.000Z",
+              "updatedAt": "2026-07-28T01:02:42.000Z",
+              "uid": "35240-4bfc4f07-c144-4610-bfa7-6aba6cc77ba8"
+            },
+            {
+              "id": "06658f72-bed3-4127-b8f1-4cf0536aeda6",
+              "name": "Missing or invalid Bearer API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/metrics?pid=<uuid>&data_type=aggregate&query=<string>&query_sql=<string>&since=<string>&from=<dateTime>&to=<dateTime>&source=http",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "metrics"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID (UUID) to scope the request.",
+                      "key": "pid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "Category of metric information to return.",
+                      "key": "data_type",
+                      "value": "aggregate"
+                    },
+                    {
+                      "description": "Predefined metric query expression.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Advanced querying using raw SQL syntax.",
+                      "key": "query_sql",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Relative time specification (e.g. `1h`, `24h`, `7d`).",
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Beginning point for absolute time range (ISO 8601).",
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Ending point for absolute time range (ISO 8601).",
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Metric origin filter.",
+                      "key": "source",
+                      "value": "http"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:02:42.000Z",
+              "updatedAt": "2026-07-28T01:02:42.000Z",
+              "uid": "35240-06658f72-bed3-4127-b8f1-4cf0536aeda6"
+            },
+            {
+              "id": "047b4680-568e-4ddf-9ca2-7ba07bffb59d",
+              "name": "Rate limit exceeded for this API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/metrics?pid=<uuid>&data_type=aggregate&query=<string>&query_sql=<string>&since=<string>&from=<dateTime>&to=<dateTime>&source=http",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "metrics"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID (UUID) to scope the request.",
+                      "key": "pid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "Category of metric information to return.",
+                      "key": "data_type",
+                      "value": "aggregate"
+                    },
+                    {
+                      "description": "Predefined metric query expression.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Advanced querying using raw SQL syntax.",
+                      "key": "query_sql",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Relative time specification (e.g. `1h`, `24h`, `7d`).",
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Beginning point for absolute time range (ISO 8601).",
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Ending point for absolute time range (ISO 8601).",
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Metric origin filter.",
+                      "key": "source",
+                      "value": "http"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Remaining",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Reset",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:02:42.000Z",
+              "updatedAt": "2026-07-28T01:02:42.000Z",
+              "uid": "35240-047b4680-568e-4ddf-9ca2-7ba07bffb59d"
+            }
+          ],
+          "createdAt": "2026-07-28T01:02:42.000Z",
+          "updatedAt": "2026-07-28T01:02:42.000Z",
+          "uid": "35240-6f39389d-f8a9-4f56-a709-1b346f10f1dc"
+        }
+      ],
+      "id": "e8f18f01-c41b-4007-a7b7-193b3cea1c6d",
+      "createdAt": "2026-07-28T01:02:42.000Z",
+      "updatedAt": "2026-07-28T01:02:42.000Z",
+      "uid": "35240-e8f18f01-c41b-4007-a7b7-193b3cea1c6d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.monoscope.tech/api/v1"
+    }
+  ]
+}

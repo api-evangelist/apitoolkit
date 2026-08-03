@@ -1,0 +1,251 @@
+{
+  "info": {
+    "_postman_id": "be55e750-42ea-4169-8372-1c7236f73be8",
+    "name": "Monoscope Platform Metrics Schema API",
+    "description": "The Monoscope (formerly APIToolkit) Platform REST API lets you\nprogrammatically query metrics, retrieve telemetry schemas, and manage\nmonitors for your projects. Endpoints and shapes here mirror the public\nAPI reference at https://monoscope.tech/docs/api-reference/. Authentication\nis via project-scoped Bearer API keys.\n\n\nContact Support:\n Name: Monoscope\n Email: hello@monoscope.tech",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:02:44.000Z",
+    "updatedAt": "2026-07-28T01:02:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-be55e750-42ea-4169-8372-1c7236f73be8"
+  },
+  "item": [
+    {
+      "name": "schema",
+      "item": [
+        {
+          "name": "Get Telemetry Schema",
+          "id": "12a863b3-d6a0-4390-b0f9-ce4607e6f6a6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/schema?pid=<uuid>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "schema"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Project ID (UUID) to scope the request.",
+                  "key": "pid",
+                  "value": "<uuid>"
+                }
+              ]
+            },
+            "description": "Retrieve the telemetry field schema for a project."
+          },
+          "response": [
+            {
+              "id": "735afe5f-2b20-4712-b6fa-be7deb29a591",
+              "name": "List of telemetry fields with types and estimated cardinality.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/schema?pid=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "schema"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID (UUID) to scope the request.",
+                      "key": "pid",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"boolean\",\n      \"cardinality\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"string\",\n      \"cardinality\": \"<integer>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:02:45.000Z",
+              "updatedAt": "2026-07-28T01:02:45.000Z",
+              "uid": "35240-735afe5f-2b20-4712-b6fa-be7deb29a591"
+            },
+            {
+              "id": "47db389c-ce60-4e10-8b26-f67542d19285",
+              "name": "Missing or invalid Bearer API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/schema?pid=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "schema"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID (UUID) to scope the request.",
+                      "key": "pid",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:02:45.000Z",
+              "updatedAt": "2026-07-28T01:02:45.000Z",
+              "uid": "35240-47db389c-ce60-4e10-8b26-f67542d19285"
+            },
+            {
+              "id": "f94e4de2-4779-4780-b249-66b4081e97bd",
+              "name": "Rate limit exceeded for this API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/schema?pid=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "schema"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Project ID (UUID) to scope the request.",
+                      "key": "pid",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Remaining",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Reset",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:02:45.000Z",
+              "updatedAt": "2026-07-28T01:02:45.000Z",
+              "uid": "35240-f94e4de2-4779-4780-b249-66b4081e97bd"
+            }
+          ],
+          "createdAt": "2026-07-28T01:02:45.000Z",
+          "updatedAt": "2026-07-28T01:02:45.000Z",
+          "uid": "35240-12a863b3-d6a0-4390-b0f9-ce4607e6f6a6"
+        }
+      ],
+      "id": "2eb2b1ab-668c-4b72-9cfa-1e30b33ebccb",
+      "createdAt": "2026-07-28T01:02:45.000Z",
+      "updatedAt": "2026-07-28T01:02:45.000Z",
+      "uid": "35240-2eb2b1ab-668c-4b72-9cfa-1e30b33ebccb"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.monoscope.tech/api/v1"
+    }
+  ]
+}
