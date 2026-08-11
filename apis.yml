@@ -137,8 +137,6 @@ apis:
     url: https://monoscope.tech/docs/faqs/
   - type: SpectralRules
     url: rules/monoscope-platform-rules.yml
-  - type: Capabilities
-    url: capabilities/monoscope-platform.yaml
   - type: Vocabulary
     url: vocabulary/apitoolkit-vocabulary.yml
   - type: JSONLD
@@ -171,8 +169,6 @@ apis:
     url: https://monoscope.tech/docs/faqs/
   - type: SpectralRules
     url: rules/monoscope-platform-rules.yml
-  - type: Capabilities
-    url: capabilities/monoscope-platform.yaml
   - type: Vocabulary
     url: vocabulary/apitoolkit-vocabulary.yml
   - type: JSONLD
@@ -205,13 +201,19 @@ apis:
     url: https://monoscope.tech/docs/faqs/
   - type: SpectralRules
     url: rules/monoscope-platform-rules.yml
-  - type: Capabilities
-    url: capabilities/monoscope-platform.yaml
   - type: Vocabulary
     url: vocabulary/apitoolkit-vocabulary.yml
   - type: JSONLD
     url: json-ld/apitoolkit-context.jsonld
 common:
+  - type: IssueTracker
+    url: https://github.com/monoscope-tech/monoscope/issues
+  - type: Releases
+    url: https://github.com/monoscope-tech/monoscope/releases
+  - type: CodeOfConduct
+    url: https://github.com/monoscope-tech/.github/blob/main/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/monoscope-tech/monoscope/blob/master/CONTRIBUTING.md
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/apitoolkit-monoscope/overview
   - type: AgenticAccess
