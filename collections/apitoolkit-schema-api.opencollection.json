@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Monoscope Platform Metrics Schema API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schema",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Telemetry Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monoscope.tech/api/v1/schema",
+            "params": [
+              {
+                "name": "pid",
+                "value": "",
+                "type": "query",
+                "description": "Project ID (UUID) to scope the request."
+              }
+            ]
+          },
+          "docs": "Retrieve the telemetry field schema for a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

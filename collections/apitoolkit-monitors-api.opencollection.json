@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Monoscope Platform Metrics Monitors API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monoscope.tech/api/v1/monitors",
+            "params": [
+              {
+                "name": "pid",
+                "value": "",
+                "type": "query",
+                "description": "Project ID (UUID) to scope the request."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter monitors by status."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Relative time range for monitor history (e.g. `24h`, `7d`)."
+              }
+            ]
+          },
+          "docs": "List monitors and their evaluation status for a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
