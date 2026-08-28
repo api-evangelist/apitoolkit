@@ -23,6 +23,20 @@ tags:
   - Platform
   - Session Replay
 kind: contract
+deliveryModel:
+  model: saas
+  license: AGPL-3.0 (community edition); commercial license available
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
