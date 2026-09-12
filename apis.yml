@@ -225,6 +225,8 @@ apis:
   - type: JSONLD
     url: json-ld/apitoolkit-context.jsonld
 common:
+  - type: Website
+    url: https://monoscope.tech/
   - type: IssueTracker
     url: https://github.com/monoscope-tech/monoscope/issues
   - type: Releases
