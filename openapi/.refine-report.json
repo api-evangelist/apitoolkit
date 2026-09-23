@@ -1,9 +1,7 @@
 {
   "provider": "apitoolkit",
   "sources": [
-    "apitoolkit-metrics-api-openapi.yml",
-    "apitoolkit-monitors-api-openapi.yml",
-    "apitoolkit-schema-api-openapi.yml"
+    "_original/monoscope-platform-openapi.yml"
   ],
   "outputs": [
     "apitoolkit-metrics-api-openapi.yml",
@@ -13,6 +11,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "monoscope-platform-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "apitoolkit-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apitoolkit-monitors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apitoolkit-schema-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

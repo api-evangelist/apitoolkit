@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Monoscope Platform Metrics Schema API
+  title: Monoscope Platform Schema API
   version: 1.0.0
   description: 'The Monoscope (formerly APIToolkit) Platform REST API lets you
 
@@ -10,9 +10,7 @@ info:
 
     API reference at https://monoscope.tech/docs/api-reference/. Authentication
 
-    is via project-scoped Bearer API keys.
-
-    '
+    is via project-scoped Bearer API keys.'
   contact:
     name: Monoscope
     url: https://monoscope.tech/
@@ -50,6 +48,53 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  schemas:
+    SchemaField:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: Fully qualified field name.
+        type:
+          type: string
+          enum:
+          - string
+          - number
+          - boolean
+          - timestamp
+        cardinality:
+          type: integer
+          description: Estimated unique values count.
+    SchemaResponse:
+      type: object
+      required:
+      - fields
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaField'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        request_id:
+          type: string
+  parameters:
+    ProjectId:
+      name: pid
+      in: query
+      required: true
+      description: Project ID (UUID) to scope the request.
+      schema:
+        type: string
+        format: uuid
   responses:
     Unauthorized:
       description: Missing or invalid Bearer API key.
@@ -73,53 +118,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  schemas:
-    SchemaField:
-      type: object
-      required:
-      - name
-      - type
-      properties:
-        name:
-          type: string
-          description: Fully qualified field name.
-        type:
-          type: string
-          enum:
-          - string
-          - number
-          - boolean
-          - timestamp
-        cardinality:
-          type: integer
-          description: Estimated unique values count.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        request_id:
-          type: string
-    SchemaResponse:
-      type: object
-      required:
-      - fields
-      properties:
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/SchemaField'
-  parameters:
-    ProjectId:
-      name: pid
-      in: query
-      required: true
-      description: Project ID (UUID) to scope the request.
-      schema:
-        type: string
-        format: uuid
   securitySchemes:
     bearerAuth:
       type: http
