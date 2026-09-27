@@ -116,12 +116,13 @@ apis:
   name: TimeFusion (Timeseries Engine)
   tags:
   - Database
-  - Open-Source
+  - Open Source
   - Storage
   tags_raw:
   - Database
   - Open Source
   - Storage
+  - Open-Source
   humanURL: https://github.com/monoscope-tech/timefusion
   properties:
   - url: https://github.com/monoscope-tech/timefusion
