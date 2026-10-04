@@ -62,48 +62,16 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  parameters:
-    ProjectId:
-      name: pid
-      in: query
-      required: true
-      description: Project ID (UUID) to scope the request.
-      schema:
-        type: string
-        format: uuid
-  responses:
-    RateLimited:
-      description: Rate limit exceeded for this API key.
-      headers:
-        X-RateLimit-Limit:
-          schema:
-            type: integer
-        X-RateLimit-Remaining:
-          schema:
-            type: integer
-        X-RateLimit-Reset:
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Bearer API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    MonitorsResponse:
       type: object
+      required:
+      - monitors
       properties:
-        code:
-          type: string
-        message:
-          type: string
-        request_id:
-          type: string
+        monitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Monitor'
     MonitorThreshold:
       type: object
       required:
@@ -120,15 +88,6 @@ components:
           - ==
         value:
           type: number
-    MonitorsResponse:
-      type: object
-      required:
-      - monitors
-      properties:
-        monitors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Monitor'
     Monitor:
       type: object
       required:
@@ -168,6 +127,47 @@ components:
         updated_at:
           type: string
           format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        request_id:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid Bearer API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded for this API key.
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ProjectId:
+      name: pid
+      in: query
+      required: true
+      description: Project ID (UUID) to scope the request.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     bearerAuth:
       type: http

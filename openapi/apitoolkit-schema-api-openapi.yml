@@ -48,34 +48,30 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  parameters:
-    ProjectId:
-      name: pid
-      in: query
-      required: true
-      description: Project ID (UUID) to scope the request.
-      schema:
-        type: string
-        format: uuid
+  responses:
+    Unauthorized:
+      description: Missing or invalid Bearer API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded for this API key.
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    SchemaResponse:
-      type: object
-      required:
-      - fields
-      properties:
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/SchemaField'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        request_id:
-          type: string
     SchemaField:
       type: object
       required:
@@ -95,29 +91,33 @@ components:
         cardinality:
           type: integer
           description: Estimated unique values count.
-  responses:
-    RateLimited:
-      description: Rate limit exceeded for this API key.
-      headers:
-        X-RateLimit-Limit:
-          schema:
-            type: integer
-        X-RateLimit-Remaining:
-          schema:
-            type: integer
-        X-RateLimit-Reset:
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Bearer API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        request_id:
+          type: string
+    SchemaResponse:
+      type: object
+      required:
+      - fields
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaField'
+  parameters:
+    ProjectId:
+      name: pid
+      in: query
+      required: true
+      description: Project ID (UUID) to scope the request.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     bearerAuth:
       type: http

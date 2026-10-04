@@ -98,16 +98,13 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  parameters:
-    ProjectId:
-      name: pid
-      in: query
-      required: true
-      description: Project ID (UUID) to scope the request.
-      schema:
-        type: string
-        format: uuid
   responses:
+    Unauthorized:
+      description: Missing or invalid Bearer API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     RateLimited:
       description: Rate limit exceeded for this API key.
       headers:
@@ -124,22 +121,32 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid Bearer API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    MetricsMetadata:
       type: object
       properties:
-        code:
+        query:
           type: string
-        message:
+        from:
           type: string
-        request_id:
+          format: date-time
+        to:
           type: string
+          format: date-time
+        resolution:
+          type: string
+    MetricsResponse:
+      type: object
+      required:
+      - series
+      - metadata
+      properties:
+        series:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricPoint'
+        metadata:
+          $ref: '#/components/schemas/MetricsMetadata'
     MetricPoint:
       type: object
       required:
@@ -155,31 +162,24 @@ components:
           type: object
           additionalProperties:
             type: string
-    MetricsResponse:
-      type: object
-      required:
-      - series
-      - metadata
-      properties:
-        series:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricPoint'
-        metadata:
-          $ref: '#/components/schemas/MetricsMetadata'
-    MetricsMetadata:
+    Error:
       type: object
       properties:
-        query:
+        code:
           type: string
-        from:
+        message:
           type: string
-          format: date-time
-        to:
+        request_id:
           type: string
-          format: date-time
-        resolution:
-          type: string
+  parameters:
+    ProjectId:
+      name: pid
+      in: query
+      required: true
+      description: Project ID (UUID) to scope the request.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     bearerAuth:
       type: http
