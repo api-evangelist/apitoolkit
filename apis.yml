@@ -227,6 +227,9 @@ apis:
   - type: JSONLD
     url: json-ld/apitoolkit-context.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/apitoolkit-capability-edges.yml
+    name: APIToolkit (Monoscope) Business Capability Map
   - type: Website
     url: https://monoscope.tech/
   - type: IssueTracker
