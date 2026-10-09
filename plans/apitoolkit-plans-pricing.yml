@@ -233,3 +233,51 @@ plans:
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - subscription
+  units:
+  - message
+  - period
+  plans:
+  - name: Monoscope Cloud
+    access: paid
+    model: hybrid
+    model_how: derived
+    units:
+    - message
+    - period
+    periods:
+    - month
+    - unbounded
+  - name: Monoscope Cloud + Your Own S3
+    access: paid
+    model: hybrid
+    model_how: derived
+    units:
+    - message
+    - period
+    periods:
+    - month
+    - unbounded
+  - name: Self-Hosted Community Edition
+    access: free
+    model: subscription
+    model_how: derived
+    units:
+    - message
+    - period
+    periods:
+    - month
+  - name: Self-Hosted Enterprise Edition
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - message
+    - period
+    periods:
+    - month
