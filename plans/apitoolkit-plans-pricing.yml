@@ -52,7 +52,7 @@ plans:
   period: month
   included_quota: SSO & advanced auth, priority support & SLA, advanced security
 x-canonical:
-  generated: '2026-11-02'
+  generated: '2026-11-06'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - hybrid
